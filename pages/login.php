@@ -53,13 +53,13 @@
                             </a> -->
                             <h3>Masuk Akun</h3>
                         </div>
-                        <form action="" method="post">
+                        <form action="../config/cek_login.php" method="post">
                             <div class="form-floating mb-3">
                                 <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
                                 <label for="floatingInput">Alamat email</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="password" name="pass" class="form-control" id="floatingPassword" placeholder="Password" required>
+                                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
                                 <label for="floatingPassword">Kata sandi</label>
                             </div>
                             <!-- <div class="d-flex align-items-center justify-content-between mb-4">
