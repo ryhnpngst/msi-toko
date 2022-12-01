@@ -6,5 +6,5 @@ session_start();
 session_destroy();
 
 //mengalihkan halaman
-header("location:../pages/login.php");
+header("location:../pages/login.php?pesan=logout");
 ?>

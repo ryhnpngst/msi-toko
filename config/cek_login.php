@@ -29,8 +29,8 @@ if($cek>0){
     $_SESSION['name'] = $name;
     $_SESSION['role'] = $role;
     $_SESSION['status'] = "login";
-    header("location:../pages/index.php");
+    header("location:../pages/dashboard.php");
 }else{
-    header("location:index.php?pesan=gagal");
+    header("location:../pages/login.php?pesan=gagal");
 }
 ?>

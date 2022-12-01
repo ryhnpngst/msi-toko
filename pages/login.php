@@ -62,14 +62,20 @@
                                 <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
                                 <label for="floatingPassword">Kata sandi</label>
                             </div>
-                            <!-- <div class="d-flex align-items-center justify-content-between mb-4">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                </div>
-                                <a href="">Forgot Password</a>
-                            </div> -->
                             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Masuk</button>
+                            <p class="text-center mb-0">
+                                <?php
+                                if(isset($_GET['pesan'])){
+                                    if($_GET['pesan']=="gagal"){
+                                        echo "Login gagal! Email atau password salah!";
+                                    }else if($_GET['pesan']=="logout"){
+                                        echo "Anda berhasil logout";
+                                    }else if($_GET['pesan']=="belum_login"){
+                                        echo "Anda harus login untuk mengakses halaman admin!";
+                                    }
+                                }
+                                ?>
+                            </p>
                         </form>
                         <p class="text-center mb-0"></p>
                     </div>
