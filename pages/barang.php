@@ -22,13 +22,19 @@
                 <div class="col-12">
                     <div class="bg-light rounded h-100 p-4">
                         <div class="row">
-                            <div class="col-lg-8">
+                            <div class="col-lg-6">
                                 <h6 class="mb-4">Tabel Produk</h6>
                             </div>
-                            <div class="col-lg-4">
-                                <form class="d-none d-md-flex ms-4">
-                                    <input class="form-control border-0" type="search" placeholder="Search">
+                            <div class="col-lg-3">
+                                <form class="ms-4" action="../pages/barang.php" method="GET">
+                                    <input class="form-control border-0" type="search" name="cari" placeholder="Cari">
                                 </form>
+                            </div>
+                            <div class="col-lg-1">                          
+                                <a href="barang.php" class="btn btn-danger">Reset</a>
+                            </div>
+                            <div class="col-lg-1">                          
+                                <a href="tambah.php" class="btn btn-primary">Tambah</a>
                             </div>
                         </div>
 
@@ -40,15 +46,18 @@
                                         <th scope="col">Nama</th>
                                         <th scope="col">Harga</th>
                                         <th scope="col">Stok</th>
-                                        <th scope="col">Country</th>
-                                        <th scope="col">ZIP</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
+                                    if(isset($_GET['cari'])){
+                                        $cari = $_GET['cari'];
+                                        $data = mysqli_query($koneksi, "SELECT * FROM product WHERE name LIKE '%".$cari."%'");
+                                    }else{
+                                        $data = mysqli_query($koneksi, "SELECT * FROM product");
+                                    }
                                     $no = 1;
-                                    $data = mysqli_query($koneksi, "SELECT * FROM product");
                                     while ($d = mysqli_fetch_array($data)) {
                                     ?>
                                         <tr>
@@ -56,9 +65,10 @@
                                             <td><?php echo $d['name']; ?></td>
                                             <td><?php echo $d['price']; ?></td>
                                             <td><?php echo $d['stok']; ?></td>
-                                            <td>USA</td>
-                                            <td>123</td>
-                                            <td>Member</td>
+                                            <td>
+                                                <a href="edit.php?id=<?php echo $d['id']; ?>"><i class="far fa-edit"></i></a> 
+                                                <a href="../config/hapus_aksi.php?id=<?php echo $d['id']; ?>"><i class="far fa-trash-alt"></i></a>                                            
+                                            </td>
                                         </tr>
                                     <?php
                                     }
