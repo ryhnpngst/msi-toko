@@ -44,8 +44,8 @@
                                     <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Nama</th>
-                                        <th scope="col">Harga</th>
-                                        <th scope="col">Stok</th>
+                                        <th scope="col"><a href="<?php $_SERVER['PHP_SELF']?>?by=harga">Harga</a></th>
+                                        <th scope="col"><a href="<?php $_SERVER['PHP_SELF']?>?by=stok">Stok</a></th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -54,7 +54,12 @@
                                     if(isset($_GET['cari'])){
                                         $cari = $_GET['cari'];
                                         $data = mysqli_query($koneksi, "SELECT * FROM product WHERE name LIKE '%".$cari."%'");
-                                    }else{
+                                    }elseif (isset($_GET['cari']) && $_GET['by'] == "harga") {
+                                        $orderBy = "harga";
+                                        $cari = $_GET['cari'];
+                                        $data = mysqli_query($koneksi, "SELECT * FROM product WHERE name LIKE '%".$cari."%' ORDER BY ".$orderBy);
+                                    }
+                                    else{
                                         $data = mysqli_query($koneksi, "SELECT * FROM product");
                                     }
                                     $no = 1;
