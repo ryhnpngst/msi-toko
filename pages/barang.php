@@ -46,7 +46,13 @@
                                         <th scope="col">Nama</th>
                                         <th scope="col"><a href="<?php $_SERVER['PHP_SELF']?>?by=harga">Harga</a></th>
                                         <th scope="col"><a href="<?php $_SERVER['PHP_SELF']?>?by=stok">Stok</a></th>
-                                        <th scope="col">Aksi</th>
+                                        <?php if($_SESSION['role'] == "Admin"){?>
+                                            <th scope="col">Aksi</th>
+                                        <?php }
+                                        if($_SESSION['role'] == "Manager") {?>
+                                            <th scope="col">Aksi</th>
+                                        <?php }; ?>    
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,8 +72,14 @@
                                             <td><?php echo $d['price']; ?></td>
                                             <td><?php echo $d['stok']; ?></td>
                                             <td>
-                                                <a href="edit.php?id=<?php echo $d['id']; ?>"><i class="far fa-edit"></i></a> 
-                                                <a href="../config/hapus_aksi.php?id=<?php echo $d['id']; ?>"><i class="far fa-trash-alt"></i></a>                                            
+                                                <?php if($_SESSION['role'] == "Admin"){?>
+                                                    <a href="edit.php?id=<?php echo $d['id']; ?>"><i class="far fa-edit"></i></a> 
+                                                    <a href="../config/hapus_aksi.php?id=<?php echo $d['id']; ?>"><i class="far fa-trash-alt"></i></a>                                            
+                                                <?php }
+                                                if($_SESSION['role'] == "Manager") {?>
+                                                    <a href="edit.php?id=<?php echo $d['id']; ?>"><i class="far fa-edit"></i></a> 
+                                                    <a href="../config/hapus_aksi.php?id=<?php echo $d['id']; ?>"><i class="far fa-trash-alt"></i></a>                                            
+                                                <?php }; ?>    
                                             </td>
                                         </tr>
                                     <?php
