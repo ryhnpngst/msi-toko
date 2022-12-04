@@ -54,12 +54,7 @@
                                     if(isset($_GET['cari'])){
                                         $cari = $_GET['cari'];
                                         $data = mysqli_query($koneksi, "SELECT * FROM product WHERE name LIKE '%".$cari."%'");
-                                    }elseif (isset($_GET['cari']) && $_GET['by'] == "harga") {
-                                        $orderBy = "harga";
-                                        $cari = $_GET['cari'];
-                                        $data = mysqli_query($koneksi, "SELECT * FROM product WHERE name LIKE '%".$cari."%' ORDER BY ".$orderBy);
-                                    }
-                                    else{
+                                    }else{
                                         $data = mysqli_query($koneksi, "SELECT * FROM product");
                                     }
                                     $no = 1;
