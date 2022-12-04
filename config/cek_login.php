@@ -29,7 +29,14 @@ if($cek>0){
     $_SESSION['name'] = $name;
     $_SESSION['role'] = $role;
     $_SESSION['status'] = "login";
-    header("location:../pages/dashboard.php");
+
+    if ($role == "Admin") {
+        header("location:../pages/barang.php"); 
+    }elseif ($role == "Reguler") {
+        header("location:../pages/barang.php");
+    }elseif ($role == "Manager") {
+        header("location:../pages/dashboard.php");
+    }
 }else{
     header("location:../pages/login.php?pesan=gagal");
 }

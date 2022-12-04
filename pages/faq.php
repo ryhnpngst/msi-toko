@@ -32,7 +32,8 @@
                         <li><a class="cd-faq__category truncate" href="#payments">Payments</a></li>
                         <li><a class="cd-faq__category truncate" href="#privacy">Privacy</a></li>
                         <li><a class="cd-faq__category truncate" href="#delivery">Delivery</a></li>
-                    </ul> <!-- cd-faq__categories -->
+                    </ul> 
+                    <!-- cd-faq__categories -->
 
                     <div class="cd-faq__items">
                         <ul id="basics" class="cd-faq__group">
