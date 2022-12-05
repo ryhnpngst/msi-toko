@@ -59,7 +59,7 @@
                                     <?php
                                     if(isset($_GET['cari'])){
                                         $cari = $_GET['cari'];
-                                        $data = mysqli_query($koneksi, "SELECT * FROM product WHERE name LIKE '%".$cari."%'");
+                                        $data = mysqli_query($koneksi, "SELECT * FROM product WHERE name LIKE '%".$cari."%' ORDER BY price, stok ASC");
                                     }else{
                                         $data = mysqli_query($koneksi, "SELECT * FROM product");
                                     }

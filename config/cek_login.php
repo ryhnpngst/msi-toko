@@ -7,7 +7,7 @@ include "koneksi.php";
 
 //menangkap data yang dikirim dari form
 $email = $_POST['email'];
-$password = $_POST['password'];
+$password = md5($_POST['password']);
 
 //menyeleksi data pengguna dengan username dan password yang sesuaia
 $data = mysqli_query($koneksi, "SELECT * FROM user WHERE email='$email' and password='$password'");
