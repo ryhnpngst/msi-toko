@@ -21,51 +21,79 @@
 
 
         <!-- Sidebar Start -->
-        <?php $page='dashboard'; include "../template/sidebar.php"; ?>
+        <?php $page = 'dashboard';
+        include "../template/sidebar.php"; ?>
         <!-- Sidebar End -->
 
 
         <!-- Content Start -->
         <div class="content">
-            
+
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-line fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Today Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                    <!-- Penjualan Hari ini -->
+                    <?php
+                    $data = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date = CURRENT_DATE()");
+                    while ($d = mysqli_fetch_array($data)) {
+                    ?>
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <i class="fa fa-chart-line fa-3x text-primary"></i>
+                                <div class="ms-3">
+                                    <p class="mb-2">Today Sale</p>
+                                    <h6 class="mb-0">Rp<?php echo $d['jumlah']; ?></h6>
+                                </div>
                             </div>
                         </div>
+                    <?php }; ?>
+
+                    <!-- Total Penjualan -->
+                    <?php
+                    $data = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction");
+                    while ($d = mysqli_fetch_array($data)) {
+                    ?>
+                        <div class="col-sm-6 col-xl-3">
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                                <div class="ms-3">
+                                    <p class="mb-2">Total Sale</p>
+                                    <h6 class="mb-0">Rp<?php echo $d['jumlah']; ?></h6>
+                                </div>
+                            </div>
+                        </div>
+                    <?php }; ?>
+
+                    <!-- Pendapatan Hari Ini -->
+                    <div class="col-sm-6 col-xl-3">
+                        <?php
+                        $data = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date = CURRENT_DATE()");
+                        while ($d = mysqli_fetch_array($data)) {
+                        ?>
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <i class="fa fa-chart-area fa-3x text-primary"></i>
+                                <div class="ms-3">
+                                    <p class="mb-2">Today Revenue</p>
+                                    <h6 class="mb-0">Rp<?php echo $d['jumlah'] + $d['jumlah'] * 0.5; ?></h6>
+                                </div>
+                            </div>
+                        <?php }; ?>
                     </div>
+
+                    <!-- Total Pendapatan -->
                     <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Total Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                        <?php
+                        $data = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction");
+                        while ($d = mysqli_fetch_array($data)) {
+                        ?>
+                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                                <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                                <div class="ms-3">
+                                    <p class="mb-2">Total Revenue</p>
+                                    <h6 class="mb-0">Rp<?php echo $d['jumlah'] + $d['jumlah'] * 0.5; ?></h6>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-area fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Today Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                            <div class="ms-3">
-                                <p class="mb-2">Total Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
-                            </div>
-                        </div>
+                        <?php }; ?>
                     </div>
                 </div>
             </div>
@@ -78,19 +106,9 @@
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light text-center rounded p-4">
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Worldwide Sales</h6>
-                                <a href="">Show All</a>
+                                <h6 class="mb-0">Penjualan dan Pendapatan</h6>
                             </div>
-                            <canvas id="worldwide-sales"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-light text-center rounded p-4">
-                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Salse & Revenue</h6>
-                                <a href="">Show All</a>
-                            </div>
-                            <canvas id="salse-revenue"></canvas>
+                            <canvas id="penjualan"></canvas>
                         </div>
                     </div>
                 </div>
@@ -102,69 +120,32 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Recent Salse</h6>
-                        <a href="">Show All</a>
+                        <h6 class="mb-0">Penjualan Terakhir</h6>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                             <thead>
-                                <tr class="text-dark">
-                                    <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Invoice</th>
-                                    <th scope="col">Customer</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Invoice</th>
+                                <th scope="col">Pembeli</th>
+                                <th scope="col">Jumlah</th>
+                                <th scope="col">Status</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                            </tbody>
+                            <?php
+                            $data = mysqli_query($koneksi, "SELECT * FROM transaction ORDER BY id DESC LIMIT 5");
+                            while ($d = mysqli_fetch_array($data)) {
+                            ?>
+                                <tbody>
+                                    <tr>
+                                        <td><?php echo $d['date']; ?></td>
+                                        <td>INV-00<?php echo $d['id']; ?></td>
+                                        <td><?php echo $d['pembeli']; ?></td>
+                                        <td>Rp<?php echo $d['total']; ?></td>
+                                        <td>Lunas</td>
+                                    </tr>
+                                </tbody>
+                            <?php }; ?>
                         </table>
                     </div>
                 </div>
@@ -190,7 +171,7 @@
 
 
             <!-- Footer Start -->
-            <?php include "../template/footer.php";?>
+            <?php include "../template/footer.php"; ?>
             <!-- Footer End -->
         </div>
         <!-- Content End -->
@@ -199,6 +180,107 @@
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
+
+    <script>
+        // Salse & Revenue Chart
+        var ctx2 = document.getElementById('penjualan').getContext('2d');
+        var penjualan = new Chart(ctx2, {
+            type: "line",
+            data: {
+                labels: ["Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
+                datasets: [{
+                        label: "Penjualan",
+                        data: [
+                            <?php
+                            $penjualanJul = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-07-%'");
+                            while ($pj = mysqli_fetch_array($penjualanJul)) {
+                                echo $pj['jumlah'];
+                            }
+                            ?>,
+                            <?php
+                            $penjualanAgu = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-08-%'");
+                            while ($pa = mysqli_fetch_array($penjualanAgu)) {
+                                echo $pa['jumlah'];
+                            }
+                            ?>,
+                            <?php
+                            $penjualanSep = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-09-%'");
+                            while ($ps = mysqli_fetch_array($penjualanSep)) {
+                                echo $ps['jumlah'];
+                            }
+                            ?>,
+                            <?php
+                            $penjualanOkt = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-10-%'");
+                            while ($po = mysqli_fetch_array($penjualanOkt)) {
+                                echo $po['jumlah'];
+                            }
+                            ?>,
+                            <?php
+                            $penjualanNov = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-11-%'");
+                            while ($pn = mysqli_fetch_array($penjualanNov)) {
+                                echo $pn['jumlah'];
+                            }
+                            ?>,
+                            <?php
+                            $penjualanDes = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-12-%'");
+                            while ($pd = mysqli_fetch_array($penjualanDes)) {
+                                echo $pd['jumlah'];
+                            }
+                            ?>
+                        ],
+                        backgroundColor: "rgba(0, 156, 255, .5)",
+                        fill: true
+                    },
+                    {
+                        label: "Pendapatan",
+                        data: [
+                            <?php
+                            $pendapatanJul = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-07-%'");
+                            while ($pj = mysqli_fetch_array($pendapatanJul)) {
+                                echo $pj['jumlah'] + $pj['jumlah'] * 0.5;
+                            }
+                            ?>,
+                            <?php
+                            $pendapatanAgu = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-08-%'");
+                            while ($pa = mysqli_fetch_array($pendapatanAgu)) {
+                                echo $pa['jumlah'] + $pa['jumlah'] * 0.5;
+                            }
+                            ?>,
+                            <?php
+                            $pendapatanSep = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-09-%'");
+                            while ($ps = mysqli_fetch_array($pendapatanSep)) {
+                                echo $ps['jumlah'] + $ps['jumlah'] * 0.5;
+                            }
+                            ?>,
+                            <?php
+                            $pendapatanOkt = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-10-%'");
+                            while ($po = mysqli_fetch_array($pendapatanOkt)) {
+                                echo $po['jumlah'] + $po['jumlah'] * 0.5;
+                            }
+                            ?>,
+                            <?php
+                            $pendapatanNov = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-11-%'");
+                            while ($pn = mysqli_fetch_array($pendapatanNov)) {
+                                echo $pn['jumlah'] + $pn['jumlah'] * 0.5;
+                            }
+                            ?>,
+                            <?php
+                            $pendapatanDes = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-12-%'");
+                            while ($pd = mysqli_fetch_array($pendapatanDes)) {
+                                echo $pd['jumlah'] + $pd['jumlah'] * 0.5;
+                            }
+                            ?>
+                        ],
+                        backgroundColor: "rgba(0, 156, 255, .3)",
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
 </body>
 
 </html>

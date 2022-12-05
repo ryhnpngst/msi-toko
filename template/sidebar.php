@@ -69,7 +69,6 @@
                 <?php }
                 if ($_SESSION['role'] == "Manager"){?>
                     <a href="../pages/dashboard.php" class="nav-item nav-link <?php if($page=='dashboard'){echo 'active';}?>"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="../pages/pengguna.php" class="nav-item nav-link <?php if($page=='pengguna'){echo 'active';}?>"><i class="fas fa-users me-2"></i>Karyawan</a>
                     <a href="../pages/barang.php" class="nav-item nav-link <?php if($page=='barang'){echo 'active';}?>"><i class="fa fa-keyboard me-2"></i>Barang</a>
                     <a href="../pages/faq.php" class="nav-item nav-link <?php if($page=='faq'){echo 'active';}?>"><i class="fas fa-question me-2"></i>FAQ</a>
                     <a href="../config/logout.php" class="nav-item nav-link "><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
