@@ -30,12 +30,17 @@
                                     <input class="form-control border-0" type="search" name="cari" placeholder="Cari">
                                 </form>
                             </div>
-                            <div class="col-lg-1">                          
+                            <div class="col-lg-1">
                                 <a href="barang.php" class="btn btn-danger">Reset</a>
                             </div>
-                            <div class="col-lg-1">                          
-                                <a href="tambah.php" class="btn btn-primary">Tambah</a>
-                            </div>
+                            <?php if ($_SESSION['role'] == "Admin") { ?>
+                                <div class="col-lg-1">
+                                    <a href="tambah.php" class="btn btn-primary">Tambah</a>
+                                </div> <?php }
+                                    if ($_SESSION['role'] == "Manager") { ?>
+                                <div class="col-lg-1">
+                                    <a href="tambah.php" class="btn btn-primary">Tambah</a>
+                                </div> <?php }; ?>
                         </div>
 
                         <div class="table-responsive">
@@ -44,23 +49,23 @@
                                     <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Nama</th>
-                                        <th scope="col"><a href="<?php $_SERVER['PHP_SELF']?>?by=harga">Harga</a></th>
-                                        <th scope="col"><a href="<?php $_SERVER['PHP_SELF']?>?by=stok">Stok</a></th>
-                                        <?php if($_SESSION['role'] == "Admin"){?>
+                                        <th scope="col"><a href="<?php $_SERVER['PHP_SELF'] ?>?by=harga">Harga</a></th>
+                                        <th scope="col"><a href="<?php $_SERVER['PHP_SELF'] ?>?by=stok">Stok</a></th>
+                                        <?php if ($_SESSION['role'] == "Admin") { ?>
                                             <th scope="col">Aksi</th>
                                         <?php }
-                                        if($_SESSION['role'] == "Manager") {?>
+                                        if ($_SESSION['role'] == "Manager") { ?>
                                             <th scope="col">Aksi</th>
-                                        <?php }; ?>    
+                                        <?php }; ?>
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    if(isset($_GET['cari'])){
+                                    if (isset($_GET['cari'])) {
                                         $cari = $_GET['cari'];
-                                        $data = mysqli_query($koneksi, "SELECT * FROM product WHERE name LIKE '%".$cari."%' ORDER BY price, stok ASC");
-                                    }else{
+                                        $data = mysqli_query($koneksi, "SELECT * FROM product WHERE name LIKE '%" . $cari . "%' ORDER BY price, stok ASC");
+                                    } else {
                                         $data = mysqli_query($koneksi, "SELECT * FROM product");
                                     }
                                     $no = 1;
@@ -72,14 +77,14 @@
                                             <td><?php echo $d['price']; ?></td>
                                             <td><?php echo $d['stok']; ?></td>
                                             <td>
-                                                <?php if($_SESSION['role'] == "Admin"){?>
-                                                    <a href="edit.php?id=<?php echo $d['id']; ?>"><i class="far fa-edit"></i></a> 
-                                                    <a href="../config/hapus_aksi.php?id=<?php echo $d['id']; ?>"><i class="far fa-trash-alt"></i></a>                                            
+                                                <?php if ($_SESSION['role'] == "Admin") { ?>
+                                                    <a href="edit.php?id=<?php echo $d['id']; ?>"><i class="far fa-edit"></i></a>
+                                                    <a href="../config/hapus_aksi.php?id=<?php echo $d['id']; ?>"><i class="far fa-trash-alt"></i></a>
                                                 <?php }
-                                                if($_SESSION['role'] == "Manager") {?>
-                                                    <a href="edit.php?id=<?php echo $d['id']; ?>"><i class="far fa-edit"></i></a> 
-                                                    <a href="../config/hapus_aksi.php?id=<?php echo $d['id']; ?>"><i class="far fa-trash-alt"></i></a>                                            
-                                                <?php }; ?>    
+                                                if ($_SESSION['role'] == "Manager") { ?>
+                                                    <a href="edit.php?id=<?php echo $d['id']; ?>"><i class="far fa-edit"></i></a>
+                                                    <a href="../config/hapus_aksi.php?id=<?php echo $d['id']; ?>"><i class="far fa-trash-alt"></i></a>
+                                                <?php }; ?>
                                             </td>
                                         </tr>
                                     <?php
