@@ -106,9 +106,18 @@
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light text-center rounded p-4">
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Penjualan dan Pendapatan</h6>
+                                <h6 class="mb-0">Penjualan dan Pendapatan Cabang Jalan Sangkuriang</h6>
                             </div>
                             <canvas id="penjualan"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Penjualan dan Pendapatan Cabang Jalan Anabul</h6>
+                            </div>
+                            <canvas id="penjualan_anabul"></canvas>
                         </div>
                     </div>
                 </div>
@@ -192,37 +201,37 @@
                         label: "Penjualan",
                         data: [
                             <?php
-                            $penjualanJul = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-07-%'");
+                            $penjualanJul = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-07-%' AND branch = 'Sangkuriang'");
                             while ($pj = mysqli_fetch_array($penjualanJul)) {
                                 echo $pj['jumlah'];
                             }
                             ?>,
                             <?php
-                            $penjualanAgu = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-08-%'");
+                            $penjualanAgu = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-08-%' AND branch = 'Sangkuriang'");
                             while ($pa = mysqli_fetch_array($penjualanAgu)) {
                                 echo $pa['jumlah'];
                             }
                             ?>,
                             <?php
-                            $penjualanSep = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-09-%'");
+                            $penjualanSep = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-09-%' AND branch = 'sangkuriang'");
                             while ($ps = mysqli_fetch_array($penjualanSep)) {
                                 echo $ps['jumlah'];
                             }
                             ?>,
                             <?php
-                            $penjualanOkt = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-10-%'");
+                            $penjualanOkt = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-10-%' AND branch = 'Sangkuriang'");
                             while ($po = mysqli_fetch_array($penjualanOkt)) {
                                 echo $po['jumlah'];
                             }
                             ?>,
                             <?php
-                            $penjualanNov = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-11-%'");
+                            $penjualanNov = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-11-%' AND branch = 'Sangkuriang'");
                             while ($pn = mysqli_fetch_array($penjualanNov)) {
                                 echo $pn['jumlah'];
                             }
                             ?>,
                             <?php
-                            $penjualanDes = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-12-%'");
+                            $penjualanDes = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-12-%' AND branch = 'Sangkuriang'");
                             while ($pd = mysqli_fetch_array($penjualanDes)) {
                                 echo $pd['jumlah'];
                             }
@@ -235,37 +244,136 @@
                         label: "Pendapatan",
                         data: [
                             <?php
-                            $pendapatanJul = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-07-%'");
+                            $pendapatanJul = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-07-%' AND branch = 'Sangkuriang'");
                             while ($pj = mysqli_fetch_array($pendapatanJul)) {
                                 echo $pj['jumlah'] + $pj['jumlah'] * 0.5;
                             }
                             ?>,
                             <?php
-                            $pendapatanAgu = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-08-%'");
+                            $pendapatanAgu = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-08-%' AND branch = 'Sangkuriang'");
                             while ($pa = mysqli_fetch_array($pendapatanAgu)) {
                                 echo $pa['jumlah'] + $pa['jumlah'] * 0.5;
                             }
                             ?>,
                             <?php
-                            $pendapatanSep = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-09-%'");
+                            $pendapatanSep = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-09-%' AND branch = 'Sangkuriang'");
                             while ($ps = mysqli_fetch_array($pendapatanSep)) {
                                 echo $ps['jumlah'] + $ps['jumlah'] * 0.5;
                             }
                             ?>,
                             <?php
-                            $pendapatanOkt = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-10-%'");
+                            $pendapatanOkt = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-10-%' AND branch = 'Sangkuriang'");
                             while ($po = mysqli_fetch_array($pendapatanOkt)) {
                                 echo $po['jumlah'] + $po['jumlah'] * 0.5;
                             }
                             ?>,
                             <?php
-                            $pendapatanNov = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-11-%'");
+                            $pendapatanNov = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-11-%' AND branch = 'Sangkuriang'");
                             while ($pn = mysqli_fetch_array($pendapatanNov)) {
                                 echo $pn['jumlah'] + $pn['jumlah'] * 0.5;
                             }
                             ?>,
                             <?php
-                            $pendapatanDes = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-12-%'");
+                            $pendapatanDes = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-12-%' AND branch = 'Sangkuriang'");
+                            while ($pd = mysqli_fetch_array($pendapatanDes)) {
+                                echo $pd['jumlah'] + $pd['jumlah'] * 0.5;
+                            }
+                            ?>
+                        ],
+                        backgroundColor: "rgba(0, 156, 255, .3)",
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Salse & Revenue Chart
+        var ctx3 = document.getElementById('penjualan_anabul').getContext('2d');
+        var penjualan_anabul = new Chart(ctx3, {
+            type: "line",
+            data: {
+                labels: ["Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
+                datasets: [{
+                        label: "Penjualan",
+                        data: [
+                            <?php
+                            $penjualanJul = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-07-%' AND branch = 'Anabul'");
+                            while ($pj = mysqli_fetch_array($penjualanJul)) {
+                                echo $pj['jumlah'];
+                            }
+                            ?>,
+                            <?php
+                            $penjualanAgu = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-08-%' AND branch = 'Anabul'");
+                            while ($pa = mysqli_fetch_array($penjualanAgu)) {
+                                echo $pa['jumlah'];
+                            }
+                            ?>,
+                            <?php
+                            $penjualanSep = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-09-%' AND branch = 'Anabul'");
+                            while ($ps = mysqli_fetch_array($penjualanSep)) {
+                                echo $ps['jumlah'];
+                            }
+                            ?>,
+                            <?php
+                            $penjualanOkt = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-10-%' AND branch = 'Anabul'");
+                            while ($po = mysqli_fetch_array($penjualanOkt)) {
+                                echo $po['jumlah'];
+                            }
+                            ?>,
+                            <?php
+                            $penjualanNov = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-11-%' AND branch = 'Anabul'");
+                            while ($pn = mysqli_fetch_array($penjualanNov)) {
+                                echo $pn['jumlah'];
+                            }
+                            ?>,
+                            <?php
+                            $penjualanDes = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-12-%' AND branch = 'Anabul'");
+                            while ($pd = mysqli_fetch_array($penjualanDes)) {
+                                echo $pd['jumlah'];
+                            }
+                            ?>
+                        ],
+                        backgroundColor: "rgba(0, 156, 255, .5)",
+                        fill: true
+                    },
+                    {
+                        label: "Pendapatan",
+                        data: [
+                            <?php
+                            $pendapatanJul = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-07-%' AND branch = 'Anabul'");
+                            while ($pj = mysqli_fetch_array($pendapatanJul)) {
+                                echo $pj['jumlah'] + $pj['jumlah'] * 0.5;
+                            }
+                            ?>,
+                            <?php
+                            $pendapatanAgu = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-08-%' AND branch = 'Anabul'");
+                            while ($pa = mysqli_fetch_array($pendapatanAgu)) {
+                                echo $pa['jumlah'] + $pa['jumlah'] * 0.5;
+                            }
+                            ?>,
+                            <?php
+                            $pendapatanSep = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-09-%' AND branch = 'Anabul'");
+                            while ($ps = mysqli_fetch_array($pendapatanSep)) {
+                                echo $ps['jumlah'] + $ps['jumlah'] * 0.5;
+                            }
+                            ?>,
+                            <?php
+                            $pendapatanOkt = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-10-%' AND branch = 'Anabul'");
+                            while ($po = mysqli_fetch_array($pendapatanOkt)) {
+                                echo $po['jumlah'] + $po['jumlah'] * 0.5;
+                            }
+                            ?>,
+                            <?php
+                            $pendapatanNov = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-11-%' AND branch = 'Anabul'");
+                            while ($pn = mysqli_fetch_array($pendapatanNov)) {
+                                echo $pn['jumlah'] + $pn['jumlah'] * 0.5;
+                            }
+                            ?>,
+                            <?php
+                            $pendapatanDes = mysqli_query($koneksi, "SELECT SUM(total) AS jumlah FROM transaction WHERE date LIKE '%-12-%' AND branch = 'Anabul'");
                             while ($pd = mysqli_fetch_array($pendapatanDes)) {
                                 echo $pd['jumlah'] + $pd['jumlah'] * 0.5;
                             }
