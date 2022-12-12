@@ -49,8 +49,8 @@
                                     <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Nama</th>
-                                        <th scope="col"><a href="<?php $_SERVER['PHP_SELF'] ?>?by=harga">Harga</a></th>
-                                        <th scope="col"><a href="<?php $_SERVER['PHP_SELF'] ?>?by=stok">Stok</a></th>
+                                        <th scope="col">Harga</th>
+                                        <th scope="col">Stok</th>
                                         <?php if ($_SESSION['role'] == "Admin") { ?>
                                             <th scope="col">Aksi</th>
                                         <?php }
