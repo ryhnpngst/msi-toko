@@ -122,71 +122,11 @@
                         </div>
                     </div>
                 </div>
-            <?php }
-            if ($_SESSION['role'] == "Manager") { ?>
-                <div class="container-fluid pt-4 px-4">
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Pertanyaan Baru</h6>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">No</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Pertanyaan</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $data = mysqli_query($koneksi, "SELECT * FROM new_faq");
-                                    $no = 1;
-                                    while ($d = mysqli_fetch_array($data)) {
-                                    ?>
-                                        <tr>
-                                            <th scope="row"><?php echo $no++; ?></th>
-                                            <td><?php echo $d['email']; ?></td>
-                                            <td><?php echo $d['question']; ?></td>
-                                            <td><a href="../config/hapus_pertanyaan.php?id=<?php echo $d['id']; ?>"><i class="fas fa-check"></i></a></td>
-                                        </tr>
-                                    <?php }; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
             <?php }; ?>
             <!-- Pertanyaan baru -->
 
             <!-- Input FAQ -->
             <?php if ($_SESSION['role'] == "Admin") { ?>
-                <div class="container-fluid pt-4 px-4">
-                    <div class="col-sm-12 col-xl-6">
-                        <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Tambahkan FAQ</h6>
-                            <form action="../config/tambah_aksi_faq.php" method="post">
-                                <div class="form-floating mb-3">
-                                    <select class="form-select" name="kategori" id="floatingSelect" aria-label="Floating label select example">
-                                        <option value="basic">Dasar</option>
-                                        <option value="account">Akun</option>
-                                    </select>
-                                    <label for="floatingSelect">Kategori</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" name="pertanyaan" class="form-control" id="floatingInput" placeholder="name@example.com">
-                                    <label for="floatingInput">Pertanyaan</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <textarea class="form-control" name="jawaban" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px;"></textarea>
-                                    <label for="floatingTextarea">Jawaban</label>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Kirim</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            <?php }
-            if ($_SESSION['role'] == "Manager") { ?>
                 <div class="container-fluid pt-4 px-4">
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-light rounded h-100 p-4">
