@@ -157,23 +157,25 @@
             <!-- Input FAQ -->
 
             <!-- Pertanyaan baru -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="col-sm-12 col-xl-6">
-                    <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Memiliki pertanyaan yang belum terjawab?</h6>
-                        <form action="../config/tambah_faq.php" method="POST">
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <textarea class="form-control" name="pertanyaan" placeholder="Ajukan pertanyaan di sini" id="floatingTextarea" style="height: 150px;"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Kirim</button>
-                        </form>
+            <?php if ($_SESSION['role'] == "Reguler") {?>
+                <div class="container-fluid pt-4 px-4">
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Memiliki pertanyaan yang belum terjawab?</h6>
+                            <form action="../config/tambah_faq.php" method="POST">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control" name="pertanyaan" placeholder="Ajukan pertanyaan di sini" id="floatingTextarea" style="height: 150px;"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Kirim</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+           <?php }; ?>
             <!-- Pertanyaan baru -->
 
 
